@@ -1,4 +1,4 @@
-// == Cytube 5 URL BOX 一括追加（JSのみ、CSS分離版） ==
+// == Cytube 5 URL BOX 一括追加（JSのみ、CSS別ファイル対応） ==
 (function() {
     console.log("[Cytube] Multi URL BOX Loaded");
 
@@ -14,9 +14,11 @@
             return;
         }
 
+        // コンテナ作成
         const container = document.createElement("div");
         container.id = "multi-url-boxes";
 
+        // 5つの入力BOX
         const boxes = [];
         for(let i=0; i<BOX_COUNT; i++){
             const input = document.createElement("input");
@@ -26,19 +28,22 @@
             container.appendChild(input);
         }
 
+        // 登録ボタン
         const regBtn = document.createElement("button");
         regBtn.textContent = "順番に追加";
         container.appendChild(regBtn);
 
+        // 動画追加ボタンの右横に挿入
         addBtn.parentNode.insertBefore(container, addBtn.nextSibling);
 
+        // 登録処理
         regBtn.onclick = () => {
             const urls = boxes.map(b => b.value.trim()).filter(Boolean);
             if(urls.length === 0) return alert("URLを1つ以上入力してください");
 
             urls.forEach(url => {
                 try {
-                    // 現行Cytube互換で追加
+                    // 現行 Cytube 互換
                     socket.emit("playlistAdd", { pos: "end", src: url });
                     console.log("[Cytube] 追加:", url);
                 } catch(e) {
