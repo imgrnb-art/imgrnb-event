@@ -1,52 +1,57 @@
-// == Cytube 5 URL BOX 一括追加（JSのみ、CSS別ファイル対応） ==
+// == Cytube 5 URL BOX 一括追加（現状HTML対応版） ==
 (function() {
     console.log("[Cytube] Multi URL BOX Loaded");
 
     const BOX_COUNT = 5; // BOXの数
+    const CONTAINER_ID = "multi-url-box"; // 現状 HTML に合わせた ID
 
     function addUI() {
-        if(document.getElementById("multi-url-boxes")) return;
-
-        const addBtn = document.getElementById("add-video-btn"); 
-        if(!addBtn){
-            console.log("[Cytube] #add-video-btn が見つからず待機…");
+        const oldContainer = document.getElementById(CONTAINER_ID);
+        if (!oldContainer) {
+            console.log("[Cytube] #multi-url-box が見つからず待機…");
             setTimeout(addUI, 1000);
             return;
         }
 
-        // コンテナ作成
-        const container = document.createElement("div");
-        container.id = "multi-url-boxes";
+        // 既存の内容をクリア
+        oldContainer.innerHTML = "";
 
-        // 5つの入力BOX
+        const wrapper = document.createElement("div");
+        wrapper.style.padding = "10px";
+        wrapper.style.border = "1px solid #666";
+        wrapper.style.marginTop = "10px";
+
+        const title = document.createElement("h3");
+        title.textContent = "複数URL登録";
+        wrapper.appendChild(title);
+
         const boxes = [];
-        for(let i=0; i<BOX_COUNT; i++){
+        for (let i = 0; i < BOX_COUNT; i++) {
             const input = document.createElement("input");
             input.type = "text";
-            input.placeholder = `URL ${i+1}`;
+            input.placeholder = `URL ${i + 1}`;
+            input.style.width = "100%";
+            input.style.marginBottom = "4px";
             boxes.push(input);
-            container.appendChild(input);
+            wrapper.appendChild(input);
         }
 
-        // 登録ボタン
         const regBtn = document.createElement("button");
-        regBtn.textContent = "順番に追加";
-        container.appendChild(regBtn);
+        regBtn.textContent = "順番に登録";
+        regBtn.style.marginTop = "8px";
+        wrapper.appendChild(regBtn);
 
-        // 動画追加ボタンの右横に挿入
-        addBtn.parentNode.insertBefore(container, addBtn.nextSibling);
+        oldContainer.appendChild(wrapper);
 
-        // 登録処理
         regBtn.onclick = () => {
             const urls = boxes.map(b => b.value.trim()).filter(Boolean);
-            if(urls.length === 0) return alert("URLを1つ以上入力してください");
+            if (urls.length === 0) return alert("URLを1つ以上入力してください");
 
             urls.forEach(url => {
                 try {
-                    // 現行 Cytube 互換
                     socket.emit("playlistAdd", { pos: "end", src: url });
                     console.log("[Cytube] 追加:", url);
-                } catch(e) {
+                } catch (e) {
                     console.error("[Cytube] 追加失敗:", url, e);
                     alert("追加に失敗したURLがあります: " + url);
                 }
@@ -55,7 +60,7 @@
             alert(`${urls.length} 件のURLを追加しました`);
         };
 
-        console.log("[Cytube] UI added!");
+        console.log("[Cytube] 5 BOX UI added!");
     }
 
     setTimeout(addUI, 2000);
