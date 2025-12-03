@@ -1,22 +1,16 @@
-/* external.css: 強制上書きで確実に Cytube 上で反映 */
-#multi-url-boxes {
-    display: inline-flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    margin-left: 6px !important;
-}
-
-#multi-url-boxes input {
+/* external.css: 強制上書きで確実に反映 */
+#multi-url-box input {
     height: 28px !important;
     font-size: 12px !important;
-    margin-right: 4px !important;
     padding: 2px 4px !important;
     border-radius: 3px !important;
     border: 1px solid #888 !important;
-    width: 150px !important;
+    width: 100% !important;
+    margin-bottom: 4px !important;
+    box-sizing: border-box !important;
 }
 
-#multi-url-boxes button {
+#multi-url-box button {
     height: 28px !important;
     font-size: 12px !important;
     background-color: #4CAF50 !important;
@@ -25,4 +19,5 @@
     border-radius: 3px !important;
     padding: 0 6px !important;
     cursor: pointer !important;
+    width: 100% !important;
 }
