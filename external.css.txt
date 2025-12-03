@@ -1,0 +1,28 @@
+/* external.css */
+#multi-url-boxes {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 6px;
+}
+
+#multi-url-boxes input {
+    height: 28px;
+    font-size: 12px;
+    margin-right: 4px;
+    padding: 2px 4px;
+    border-radius: 3px;
+    border: 1px solid #888;
+    width: 150px;
+}
+
+#multi-url-boxes button {
+    height: 28px;
+    font-size: 12px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: 1px solid #3e8e41;
+    border-radius: 3px;
+    padding: 0 6px;
+    cursor: pointer;
+}
