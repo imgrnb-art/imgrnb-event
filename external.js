@@ -47,6 +47,9 @@ for (let i = 1; i <= 5; i++) {
 
 }
 
+// ページに追加
+container.appendChild(multiUrlDiv);
+
 (function() {
     // 追加用の親コンテナを作成
     const multiUrlContainer = document.createElement('div');
@@ -103,6 +106,6 @@ for (let i = 1; i <= 5; i++) {
     rightControls.appendChild(multiUrlContainer);
 })();
 
-// ページに追加
-container.appendChild(multiUrlDiv);
+
+
 
